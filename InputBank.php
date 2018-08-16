@@ -1,51 +1,10 @@
 <?php
+  include 'Bank.php';
   session_start();
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    class Bank {
-      public $id_bank;
-      public $nama_bank;
-      public $alamat;
-      public $nomor_telepon;
-
-      function setId_bank($id_bank) {
-        $this->id_bank = $id_bank;
-      }
-
-      function getId_bank() {
-        return $this->id_bank;
-      }
-
-      function setNama_bank($nama_bank) {
-        $this->nama_bank = $nama_bank;
-      }
-
-      function getNama_bank() {
-        return $this->nama_bank;
-      }
-
-      function setAlamat($alamat) {
-        $this->alamat = $alamat;
-      }
-
-      function getAlamat() {
-        return $this->alamat;
-      }
-
-      function setNomor_telepon($nomor_telepon) {
-        $this->nomor_telepon = $nomor_telepon;
-      }
-
-      function getNomor_telepon() {
-        return $this->nomor_telepon;
-      }
-    }
-
-    if (!isset($_SESSION['id_bank'])) {
-      $_SESSION['id_bank'] = array();
-      $_SESSION['nama_bank'] = array();
-      $_SESSION['alamat'] = array();
-      $_SESSION['nomor_telepon'] = array();
+    if (!isset($_SESSION['bankList'])) {
+      $_SESSION['bankList'] = array();
     }
 
     $Bank = new Bank();
@@ -54,10 +13,7 @@
     $Bank->setAlamat($_POST['alamat']);
     $Bank->setNomor_telepon($_POST['nomor_telepon']);
 
-    array_push($_SESSION['id_bank'], $Bank->getId_bank());
-    array_push($_SESSION['nama_bank'], $Bank->getNama_bank());
-    array_push($_SESSION['alamat'], $Bank->getAlamat());
-    array_push($_SESSION['nomor_telepon'], $Bank->getNomor_telepon());
+    array_push($_SESSION['bankList'], $Bank);
 
     echo "Input bank ".$_POST['nama_bank']." sukses";
   }

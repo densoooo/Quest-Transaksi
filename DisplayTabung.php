@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+include 'Tabung.php';
+session_start(); ?>
 <html>
   <body>
     <table>
@@ -10,12 +12,12 @@
           <th>Saldo Tabung</th>
         </tr>
       </thead>
-      <?php for ($i=0; $i < count($_SESSION['id_account_tabung']); $i++) {?>
+      <?php for ($i=0; $i < count($_SESSION['listTabung']); $i++) {?>
         <tr>
-          <td><?php echo $_SESSION['id_account_tabung'][$i];?></td>
-          <td><?php echo $_SESSION['tanggal_tabung'][$i];?></td>
-          <td><?php echo $_SESSION['jumlah_tabung'][$i];?></td>
-          <td><?php echo $_SESSION['saldo_tabung'][$i];?></td>
+          <td><?php echo $_SESSION['listTabung'][$i]->getId_account();?></td>
+          <td><?php echo $_SESSION['listTabung'][$i]->getTanggal_tabung();?></td>
+          <td><?php echo $_SESSION['listTabung'][$i]->getJumlah_tabung();?></td>
+          <td><?php echo $_SESSION['listTabung'][$i]->getSaldo_tabung();?></td>
         </tr>
       <?php } ?>
     </table>

@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+include 'Bank.php';
+session_start(); ?>
 <html>
   <body>
     <table>
@@ -10,12 +12,12 @@
           <th>Nomor Telepon</th>
         </tr>
       </thead>
-      <?php for ($i=0; $i < count($_SESSION['id_bank']); $i++) {?>
+      <?php for ($i=0; $i < count($_SESSION['bankList']); $i++) {?>
         <tr>
-          <td><?php echo $_SESSION['id_bank'][$i];?></td>
-          <td><?php echo $_SESSION['nama_bank'][$i];?></td>
-          <td><?php echo $_SESSION['alamat'][$i];?></td>
-          <td><?php echo $_SESSION['nomor_telepon'][$i];?></td>
+          <td><?php echo $_SESSION['bankList'][$i]->getId_bank();?></td>
+          <td><?php echo $_SESSION['bankList'][$i]->getNama_bank();?></td>
+          <td><?php echo $_SESSION['bankList'][$i]->getAlamat();?></td>
+          <td><?php echo $_SESSION['bankList'][$i]->getNomor_telepon();?></td>
         </tr>
       <?php } ?>
     </table>

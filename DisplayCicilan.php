@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+include 'Cicilan.php';
+session_start(); ?>
 <html>
   <body>
     <table>
@@ -10,12 +12,12 @@
           <th>Saldo</th>
         </tr>
       </thead>
-      <?php for ($i=0; $i < count($_SESSION['id_pinjaman_cicilan']); $i++) {?>
+      <?php for ($i=0; $i < count($_SESSION['listCicilan']); $i++) {?>
         <tr>
-          <td><?php echo $_SESSION['id_pinjaman_cicilan'][$i];?></td>
-          <td><?php echo $_SESSION['tanggal_transaksi'][$i];?></td>
-          <td><?php echo $_SESSION['jumlah_bayar'][$i];?></td>
-          <td><?php echo $_SESSION['saldo_cicilan'][$i];?></td>
+          <td><?php echo $_SESSION['listCicilan'][$i]->getId_pinjaman();?></td>
+          <td><?php echo $_SESSION['listCicilan'][$i]->getTanggal_transaksi();?></td>
+          <td><?php echo $_SESSION['listCicilan'][$i]->getJumlah_bayar();?></td>
+          <td><?php echo $_SESSION['listCicilan'][$i]->getSaldo_cicilan();?></td>
         </tr>
       <?php } ?>
     </table>

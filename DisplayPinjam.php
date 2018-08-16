@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+include 'Pinjaman.php';
+session_start(); ?>
 <html>
   <body>
     <table>
@@ -10,12 +12,12 @@
           <th>Saldo Pinjam</th>
         </tr>
       </thead>
-      <?php for ($i=0; $i < count($_SESSION['id_account_pinjam']); $i++) {?>
+      <?php for ($i=0; $i < count($_SESSION['listPinjaman']); $i++) {?>
         <tr>
-          <td><?php echo $_SESSION['id_account_pinjam'][$i];?></td>
-          <td><?php echo $_SESSION['tanggal_pinjam'][$i];?></td>
-          <td><?php echo $_SESSION['jumlah_pinjam'][$i];?></td>
-          <td><?php echo $_SESSION['saldo_pinjam'][$i];?></td>
+          <td><?php echo $_SESSION['listPinjaman'][$i]->getId_account();?></td>
+          <td><?php echo $_SESSION['listPinjaman'][$i]->getTanggal_pinjam();?></td>
+          <td><?php echo $_SESSION['listPinjaman'][$i]->getJumlah_pinjam();?></td>
+          <td><?php echo $_SESSION['listPinjaman'][$i]->getSaldo_pinjam();?></td>
         </tr>
       <?php } ?>
     </table>

@@ -1,51 +1,11 @@
 <?php
+  include 'Cicilan.php';
   session_start();
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    class Cicilan {
-      public $id_pinjaman;
-      public $tanggal_transaksi;
-      public $jumlah_bayar;
-      public $saldo_cicilan;
 
-      function setId_pinjaman($id_pinjaman) {
-        $this->id_pinjaman = $id_pinjaman;
-      }
-
-      function getId_pinjaman() {
-        return $this->id_pinjaman;
-      }
-
-      function setTanggal_transaksi($tanggal_transaksi) {
-        $this->tanggal_transaksi = $tanggal_transaksi;
-      }
-
-      function getTanggal_transaksi() {
-        return $this->tanggal_transaksi;
-      }
-
-      function setJumlah_bayar($jumlah_bayar) {
-        $this->jumlah_bayar = $jumlah_bayar;
-      }
-
-      function getJumlah_bayar() {
-        return $this->jumlah_bayar;
-      }
-
-      function setSaldo_cicilan($saldo_cicilan) {
-        $this->saldo_cicilan = $saldo_cicilan;
-      }
-
-      function getSaldo_cicilan() {
-        return $this->saldo_cicilan;
-      }
-    }
-
-    if (!isset($_SESSION['id_pinjaman_cicilan'])) {
-      $_SESSION['id_pinjaman_cicilan'] = array();
-      $_SESSION['tanggal_transaksi'] = array();
-      $_SESSION['jumlah_bayar'] = array();
-      $_SESSION['saldo_cicilan'] = array();
+    if (!isset($_SESSION['listCicilan'])) {
+      $_SESSION['listCicilan'] = array();
     }
 
     $Cicilan = new Cicilan();
@@ -54,10 +14,7 @@
     $Cicilan->setJumlah_bayar($_POST['jumlah_bayar']);
     $Cicilan->setSaldo_cicilan($_POST['saldo_cicilan']);
 
-    array_push($_SESSION['id_pinjaman_cicilan'], $Cicilan->getId_pinjaman());
-    array_push($_SESSION['tanggal_transaksi'], $Cicilan->getTanggal_transaksi());
-    array_push($_SESSION['jumlah_bayar'], $Cicilan->getJumlah_bayar());
-    array_push($_SESSION['saldo_cicilan'], $Cicilan->getSaldo_cicilan());
+    array_push($_SESSION['listCicilan'], $Cicilan);
 
     echo "Input pinjaman ".$_POST['id_pinjaman']." sukses";
   }
