@@ -2,29 +2,23 @@
   include 'Account.php';
   session_start();
 
-  if (isset($_POST['nama'])) {
-    function BinarySearch($array, $bawah, $atas, $x) {
-        if ($atas >= $bawah) {
-          $mid = $bawah + ($atas - $bawah) / 2;
-          if ($array[$mid] == $x) {
-              return floor($mid);
-            }
-
-          if ($array[$mid] > $x) {
-              return BinarySearch($array, $bawah, $mid - 1, $x);
-            }
-          return BinarySearch($array, $mid + 1, $atas, $x);
-        }
-      return -1;
-    }
+  if (isset($_POST['data'])) {
+    include 'BinarySearch.php';
 
     $array = array();
-    foreach ($_SESSION['accountList'] as $nama) {
-      $array[] = $nama->getNama();
+    foreach ($_SESSION['accountList'] as $data) {
+      switch ($_POST['kategori']) {
+        case 'nama':
+          $array[] = array($data->getNama() , $data->getId_Account()-1);
+          break;
+        case 'alamat':
+          $array[] = array($data->getAlamat() , $data->getId_Account()-1);
+          break;
+      }
     }
-    $n = count($array);
-    $x = $_POST['nama'];
-    $hasil = BinarySearch($array, 0, $n - 1, $x);
+    $x = $_POST['data'];
+    array_multisort(array_column($array, 0), SORT_ASC, $array);
+    $hasil = BinarySearch($array,$x);
   }
 ?>
 
@@ -53,8 +47,14 @@
     <div class="wrapper">
       <form method="post">
         <div>
-          <label>Cari Username</label>
-          <input type="text" name="nama"/>
+          <label>Cari Data</label>
+          <input type="text" name="data"/>
+        </div>
+        <div>
+          <select name="kategori">
+            <option value="nama">Nama</option>
+            <option value="alamat">Alamat</option>
+          </select>
         </div>
         <div>
           <input type="submit" name="submit" value="kirim"/>
@@ -62,9 +62,9 @@
       </from>
 
       <?php
-      if (isset($_POST['nama'])) {
+      if (isset($_POST['data'])) {
         if(($hasil == -1)){
-          echo "Username ".$_POST['nama']." tidak ditemukan";
+          echo $_POST['data']." tidak ditemukan";
         } else {
       ?>
         <table>
