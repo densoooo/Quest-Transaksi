@@ -67,6 +67,7 @@
           echo $_POST['data']." tidak ditemukan";
         } else {
       ?>
+      
         <table>
           <thead>
             <tr>

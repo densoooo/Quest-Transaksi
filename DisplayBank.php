@@ -63,6 +63,7 @@ if (isset($_POST['data'])) {
           echo $_POST['data']." tidak ditemukan";
         } else {
       ?>
+      
         <table>
           <thead>
             <tr>

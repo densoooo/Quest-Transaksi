@@ -27,4 +27,4 @@ function BinarySearch(Array $array, $x) {
     // If we reach here element x doesnt exist
     return -1;
 }
- ?>
+?>
